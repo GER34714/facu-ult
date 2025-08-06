@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF‑8">
   <meta name="viewport" content="width=device‑width, initial‑scale=1">
-  <title>Facu Casino – Conectando...</title>
+  <title>Momento por favor ,esto sera rapido...</title>
   <style>
     body { background:#1b1b1b; color:white; font-family:sans-serif;
       display:flex; flex-direction:column; align-items:center;
@@ -19,13 +19,13 @@
 <body>
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_Casino.svg/512px-Logo_Casino.svg.png" alt="Facu Casino Logo">
   <div class="spinner"></div>
-  <div class="text">Conectando con un asistente...</div>
+  <div class="text">Conectando con su cajero asignado...</div>
   <script>
     async function getNumero() {
       try {
         const resp = await fetch('/numero');
         const data = await resp.json();
-        const mensaje = encodeURIComponent("Hola, quiero información sobre FACU CASINO 🎰");
+        const mensaje = encodeURIComponent("hola, me creas un usuario por favor? mi nombre es: ");
         setTimeout(() => {
           window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
         }, 3000);
