@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Conectando...</title>
   <style>
     body {
-      background: linear-gradient(135deg, #4B0082, #f9c518);
+      background: linear-gradient(to bottom, #6a0dad, #d4af37);
       color: white;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -17,44 +17,64 @@
       margin: 0;
       text-align: center;
     }
-
-    .gif {
-      width: 200px;
-      margin-bottom: 25px;
+    img {
+      width: 300px;
+      margin-bottom: 20px;
     }
-
     .spinner {
-      width: 60px;
-      height: 60px;
-      border: 6px solid rgba(255, 255, 255, 0.1);
-      border-top: 6px solid #f9c518;
+      border: 5px solid rgba(255,255,255,0.2);
+      border-top: 5px solid #f9c518;
       border-radius: 50%;
+      width: 50px;
+      height: 50px;
       animation: spin 1s linear infinite;
-      box-shadow: 0 0 10px #f9c518;
     }
-
     @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+      to { transform: rotate(360deg); }
     }
-
     .text {
-      margin-top: 25px;
+      margin-top: 20px;
       font-size: 18px;
+    }
+    .fallback {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    .fallback a {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+    .fallback a:hover {
+      background-color: rgba(0, 0, 0, 0.5);
     }
   </style>
 </head>
 <body>
-  <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGZzY2E2a3ZzaWk0d2xxY2hydndteWR6eHFod2Z3eHVhb2pwdGN1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Animación" />
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGZzY2E2a3ZzaWk0d2xxY2hydndteWR6eHFod2Z3eHVhb2pwdGN1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Animación de conexión">
   <div class="spinner"></div>
   <div class="text">Conectando con su cajero asignado...</div>
+  <div class="fallback">
+    Si no sos redirigido automáticamente, <br>
+    <a href="https://wa.me/5491125127839?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20FACU%20CASINO%20🎰" target="_blank">hacé clic acá</a>
+  </div>
 
   <script>
     async function getNumero() {
       try {
         const resp = await fetch('/numero');
-        if (!resp.ok) throw
+        const data = await resp.json();
+        const mensaje = encodeURIComponent("Hola, quiero información sobre FACU CASINO 🎰");
+        setTimeout(() => {
+          window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
+        }, 3000);
+      } catch {
+        document.querySelector('.text').textContent = "Error al conectar, podés usar el enlace de abajo.";
+      }
+    }
+    getNumero();
+  </script>
+</body>
+</html>
