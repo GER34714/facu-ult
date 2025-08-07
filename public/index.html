@@ -66,7 +66,7 @@
       try {
         const resp = await fetch('/numero');
         const data = await resp.json();
-        const mensaje = encodeURIComponent("Hola, quiero información sobre FACU CASINO 🎰");
+        const mensaje = encodeURIComponent("Hola, me creas un usuario? mi nombre es:");
         setTimeout(() => {
           window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
         }, 3000);
