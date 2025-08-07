@@ -1,25 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF‑8">
-  <meta name="viewport" content="width=device‑width, initial‑scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Facu Casino – Conectando...</title>
   <style>
-    body { background:#1b1b1b; color:white; font-family:sans-serif;
-      display:flex; flex-direction:column; align-items:center;
-      justify-content:center; height:100vh; margin:0; text-align:center; }
-    img { width:180px; margin-bottom:20px; }
-    .spinner { border:5px solid rgba(255,255,255,0.2);
-      border-top:5px solid #f9c518; border-radius:50%; width:50px;
-      height:50px; animation:spin 1s linear infinite; }
-    @keyframes spin { transform: rotate(360deg); }
-    .text { margin-top:20px; font-size:18px; }
+    body {
+      background: #1b1b1b;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    img.logo {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+    img.gif-carga {
+      width: 80px;
+      margin: 10px 0;
+    }
+    .text {
+      margin-top: 20px;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
-  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2k0OGF4YTB3Z3o0M3V1emEzNzA4aXlsdTA4cmZrM21jend1ZjhmaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Facu Casino Animado">
-  <div class="spinner"></div>
-  <div class="text">Conectando con su cajero asignado...</div>
+  <!-- Logo animado o estático -->
+  <img class="logo" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2k0OGF4YTB3Z3o0M3V1emEzNzA4aXlsdTA4cmZrM21jend1ZjhmaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Facu Casino Animado">
+
+  <!-- GIF de carga (tragamonedas girando) -->
+  <img class="gif-carga" src="https://media.giphy.com/media/UQBnUG1En6Nks/giphy.gif" alt="Cargando tragamonedas">
+
+  <!-- Texto de conexión -->
+  <div class="text">🎰 Conectando con su cajero asignado... 💬</div>
+
+  <!-- Script para redirigir -->
   <script>
     async function getNumero() {
       try {
@@ -30,7 +52,7 @@
           window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
         }, 3000);
       } catch {
-        document.querySelector('.text').textContent = "Error al conectar, intenta de nuevo.";
+        document.querySelector('.text').textContent = "❌ Error al conectar, intenta de nuevo.";
       }
     }
     getNumero();
