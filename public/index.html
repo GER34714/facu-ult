@@ -17,10 +17,12 @@
       margin: 0;
       text-align: center;
     }
-    .logo {
-      width: 150px;
+
+    .gif {
+      width: 180px;
       margin-bottom: 25px;
     }
+
     .spinner {
       width: 60px;
       height: 60px;
@@ -30,10 +32,16 @@
       animation: spin 1s linear infinite;
       box-shadow: 0 0 10px #f9c518;
     }
+
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
+
     .text {
       margin-top: 25px;
       font-size: 18px;
@@ -41,14 +49,13 @@
   </style>
 </head>
 <body>
-  <img class="logo" src="logofacu.jpeg" alt="Logo" />
+  <img class="gif" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGZzY2E2a3ZzaWk0d2xxY2hydndteWR6eHFod2Z3eHVhb2pwdGN1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Animación" />
   <div class="spinner"></div>
   <div class="text">Conectando con su cajero asignado...</div>
 
   <script>
     async function getNumero() {
       try {
-        // Petición al backend para obtener el número de WhatsApp
         const resp = await fetch('/numero');
         if (!resp.ok) throw new Error('Error en la respuesta');
         const data = await resp.json();
@@ -57,7 +64,6 @@
           window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
         }, 3000);
       } catch (error) {
-        // En caso de error muestra el mensaje
         document.querySelector('.text').textContent = 'Error al conectar, intenta de nuevo.';
         console.error(error);
       }
