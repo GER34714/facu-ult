@@ -17,12 +17,10 @@
       margin: 0;
       text-align: center;
     }
-
     .logo {
       width: 150px;
       margin-bottom: 25px;
     }
-
     .spinner {
       width: 60px;
       height: 60px;
@@ -32,16 +30,10 @@
       animation: spin 1s linear infinite;
       box-shadow: 0 0 10px #f9c518;
     }
-
     @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
-
     .text {
       margin-top: 25px;
       font-size: 18px;
@@ -56,17 +48,22 @@
   <script>
     async function getNumero() {
       try {
+        // Petición al backend para obtener el número de WhatsApp
         const resp = await fetch('/numero');
+        if (!resp.ok) throw new Error('Error en la respuesta');
         const data = await resp.json();
         const mensaje = encodeURIComponent('Hola, quiero información, por favor.');
         setTimeout(() => {
           window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
         }, 3000);
-      } catch {
+      } catch (error) {
+        // En caso de error muestra el mensaje
         document.querySelector('.text').textContent = 'Error al conectar, intenta de nuevo.';
+        console.error(error);
       }
     }
     getNumero();
   </script>
 </body>
 </html>
+
