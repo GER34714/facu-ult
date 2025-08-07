@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Facu Casino – Conectando...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conectando...</title>
   <style>
     body {
-      background: #1b1b1b;
+      background: linear-gradient(135deg, #4B0082, #f9c518);
       color: white;
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -17,49 +17,54 @@
       margin: 0;
       text-align: center;
     }
-    img.logo {
-      width: 180px;
-      margin-bottom: 20px;
+
+    .logo {
+      width: 150px;
+      margin-bottom: 25px;
     }
-    img.gif-carga {
-      width: 80px;
-      margin: 10px 0;
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(255, 255, 255, 0.1);
+      border-top: 6px solid #f9c518;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      box-shadow: 0 0 10px #f9c518;
     }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     .text {
-      margin-top: 20px;
+      margin-top: 25px;
       font-size: 18px;
     }
   </style>
 </head>
 <body>
-  <!-- Logo animado o estático -->
-  <img class="logo" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2k0OGF4YTB3Z3o0M3V1emEzNzA4aXlsdTA4cmZrM21jend1ZjhmaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Facu Casino Animado">
+  <img class="logo" src="logofacu.jpeg" alt="Logo" />
+  <div class="spinner"></div>
+  <div class="text">Conectando con su cajero asignado...</div>
 
-  <!-- GIF de carga (tragamonedas girando) -->
-  <img class="gif-carga" src="https://media.giphy.com/media/UQBnUG1En6Nks/giphy.gif" alt="Cargando tragamonedas">
-
-  <!-- Texto de conexión -->
-  <div class="text">🎰 Conectando con su cajero asignado... 💬</div>
-
-  <!-- Script para redirigir -->
   <script>
     async function getNumero() {
       try {
         const resp = await fetch('/numero');
         const data = await resp.json();
-        const mensaje = encodeURIComponent("Hola, quiero información sobre FACU CASINO 🎰");
+        const mensaje = encodeURIComponent('Hola, quiero información, por favor.');
         setTimeout(() => {
           window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
         }, 3000);
       } catch {
-        document.querySelector('.text').textContent = "❌ Error al conectar, intenta de nuevo.";
+        document.querySelector('.text').textContent = 'Error al conectar, intenta de nuevo.';
       }
-    }
-    getNumero();
-  </script>
-</body>
-</html>
-
     }
     getNumero();
   </script>
