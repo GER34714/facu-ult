@@ -19,7 +19,7 @@
     }
 
     .gif {
-      width: 300px;
+      width: 200px;
       margin-bottom: 25px;
     }
 
@@ -57,18 +57,4 @@
     async function getNumero() {
       try {
         const resp = await fetch('/numero');
-        if (!resp.ok) throw new Error('Error en la respuesta');
-        const data = await resp.json();
-        const mensaje = encodeURIComponent('Hola, quiero información, por favor.');
-        setTimeout(() => {
-          window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
-        }, 3000);
-      } catch (error) {
-        document.querySelector('.text').textContent = 'Error al conectar, intenta de nuevo.';
-        console.error(error);
-      }
-    }
-    getNumero();
-  </script>
-</body>
-</html>
+        if (!resp.ok) throw
