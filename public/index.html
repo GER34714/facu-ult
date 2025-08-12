@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Conectando...</title>
   <style>
     body {
@@ -46,6 +46,7 @@
       padding: 6px 12px;
       border-radius: 6px;
       text-decoration: none;
+      cursor: pointer;
     }
     .fallback a:hover {
       background-color: rgba(0, 0, 0, 0.5);
@@ -53,28 +54,37 @@
   </style>
 </head>
 <body>
-  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGZzY2E2a3ZzaWk0d2xxY2hydndteWR6eHFod2Z3eHVhb2pwdGN1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Animación de conexión">
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGZzY2E2a3ZzaWk0d2xxY2hydndteWR6eHFod2Z3eHVhb2pwdGN1NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XIcSoQtk4naILTPGgX/giphy.gif" alt="Animación de conexión" />
   <div class="spinner"></div>
-  <div class="text">  Conectando con su cajero asignado...  </div>
+  <div class="text">Conectando con su cajero asignado...</div>
   <div class="fallback">
-    Si no sos redirigido automáticamente, <br>
-    <a href="https://wa.me/5491125127839?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20FACU%20CASINO%20🎰" target="_blank">hacé clic acá</a>
+    Si no sos redirigido automáticamente, <br />
+    <a id="rotar-link">hacé clic acá</a>
   </div>
 
   <script>
-    async function getNumero() {
+    const mensaje = encodeURIComponent("Hola, me creas un usuario? mi nombre es:");
+
+    async function redirigirNumero() {
       try {
         const resp = await fetch('/numero');
         const data = await resp.json();
-        const mensaje = encodeURIComponent("Hola, me creas un usuario? mi nombre es:");
-        setTimeout(() => {
-          window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
-        }, 3000);
+        window.open(`https://wa.me/${data.numero}?text=${mensaje}`, '_blank');
       } catch {
-        document.querySelector('.text').textContent = "Error al conectar, podés usar el enlace de abajo.";
+        alert("Error al conectar, por favor intentá de nuevo más tarde.");
       }
     }
-    getNumero();
+
+    // Redirección automática después de 3 segundos
+    setTimeout(() => {
+      redirigirNumero();
+    }, 3000);
+
+    // Evento para el clic en el enlace
+    document.getElementById('rotar-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      redirigirNumero();
+    });
   </script>
 </body>
 </html>
