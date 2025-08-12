@@ -65,24 +65,29 @@
   <script>
     const mensaje = encodeURIComponent("Hola, me creas un usuario? mi nombre es:");
 
+    let redirigido = false; // Controla si ya se hizo la redirección
+
     async function redirigirNumero() {
+      if (redirigido) return; // Si ya redirigió, no hace nada
+      redirigido = true;
       try {
         const resp = await fetch('/numero');
         const data = await resp.json();
-        window.open(`https://wa.me/${data.numero}?text=${mensaje}`, '_blank');
+        window.location.href = `https://wa.me/${data.numero}?text=${mensaje}`;
       } catch {
         alert("Error al conectar, por favor intentá de nuevo más tarde.");
       }
     }
 
-    // Redirección automática después de 3 segundos
-    setTimeout(() => {
+    // Redirección automática después de 2 segundos, solo si no se hizo clic antes
+    const timeoutId = setTimeout(() => {
       redirigirNumero();
-    }, 3000);
+    }, 2000);
 
     // Evento para el clic en el enlace
     document.getElementById('rotar-link').addEventListener('click', (e) => {
       e.preventDefault();
+      clearTimeout(timeoutId); // Cancela la redirección automática pendiente
       redirigirNumero();
     });
   </script>
