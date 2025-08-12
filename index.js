@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const numeros = ['5491125127839','5491132653145','5491164499481'];
+const numeros = ['5491125127839',5491159255356];
 
 let idx = 0;
 const stateFile = 'state.json';
@@ -31,3 +31,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(PORT, () => {
   console.log(`Servidor activo en el puerto ${PORT}`);
 });
+
